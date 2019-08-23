@@ -11,7 +11,7 @@ import { NotFoundError } from '../common/not-found-error';
 })
 export class HomeService {
 
-  private url = 'https://community-open-weather-map.p.rapidapi.com/weather?q=';
+  private url = 'https://community-open-weather-map.p.rapidapi.com/weather?lang=pl&units=metric&q=';
 
   private headerOptions = {
     headers: new HttpHeaders({

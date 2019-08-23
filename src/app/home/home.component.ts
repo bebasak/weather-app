@@ -9,7 +9,7 @@ import { NotFoundError } from '../common/not-found-error';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  request: any;
+  weatherData: any;
 
   constructor(private service: HomeService) { }
 
@@ -24,10 +24,13 @@ export class HomeComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          this.weatherData = response;
         },
         (error: AppError) => {
-          if (error instanceof NotFoundError)
+          this.weatherData = null;
+          if (error instanceof NotFoundError){            
             alert('Nie znaleziono.');
+          }            
           else {
             throw error;
           }

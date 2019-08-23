@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HomeService } from './services/home.service';
 import { AppErrorHandler } from './common/app-error-handler';
+import { CapitalizeFirstLetterPipe } from './capitalize-first-letter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CapitalizeFirstLetterPipe
   ],
   imports: [
     BrowserModule,
