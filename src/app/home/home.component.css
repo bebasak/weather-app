@@ -11,6 +11,9 @@
     border-width: 1px;
     border-color: black;
     border-radius: 10px;
+    position: absolute;
+    top: auto;
+    left: 450px;
 }
 
 .weather-data-elements {

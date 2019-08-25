@@ -1,12 +1,12 @@
 <h1>Weather app</h1>
 <div class="cityInput">
     <input 
-    (keyup.enter)="getData(city)" #city
+    (keyup.enter)="getData(city); del()" #city
     type="text"
     class="form-control">
 </div>
 
-<div *ngIf="weatherData" class="weather-data">
+<div *ngIf="weatherData" class="weather-data" @slide>
     <h2>Aktualna pogoda w: {{ city.value | titlecase }}</h2>
     <ul class="list-group list-group-flush weather-data-elements">
         <li class="list-group-item">

@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../services/home.service';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
+import { slide } from '../animations';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    slide
+  ]
 })
 export class HomeComponent implements OnInit {
   weatherData: any;
@@ -14,6 +18,11 @@ export class HomeComponent implements OnInit {
   constructor(private service: HomeService) { }
 
   ngOnInit() {
+  }
+
+  del() {
+    if(this.weatherData)
+      this.weatherData = null;
   }
 
   getData(input: HTMLInputElement) {
