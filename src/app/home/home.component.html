@@ -4,6 +4,19 @@
     (keyup.enter)="getData(city); del()" #city
     type="text"
     class="form-control">
+<div class="city-input">
+    <div class="city-input-element">
+        <input 
+            (keyup.enter)="getData(city)" #city
+            placeholder="Nazwa miasta"
+            type="text"
+            class="form-control">
+    </div>
+    <div class="city-input-element">
+        <button 
+            (click)="getData(city)"
+            class="btn btn-primary">Ok</button>
+    </div>    
 </div>
 
 <div *ngIf="weatherData" class="weather-data" @slide>

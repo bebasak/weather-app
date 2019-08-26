@@ -1,4 +1,4 @@
-.cityInput {
+.city-input {
     width: 250px;
     margin: 0 auto;
     float: none;
@@ -18,4 +18,8 @@
 
 .weather-data-elements {
     padding: 5px;
+} 
+
+.city-input-element {
+    float: left;
 }
