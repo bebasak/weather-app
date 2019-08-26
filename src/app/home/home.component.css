@@ -14,6 +14,7 @@
     position: absolute;
     top: auto;
     left: 450px;
+    background-color: white;
 }
 
 .weather-data-elements {
@@ -25,7 +26,7 @@
 }
 
 .forecast-data {
-    margin-top: 350px;
+    margin-top: 320px;
     position: absolute;
 }
 

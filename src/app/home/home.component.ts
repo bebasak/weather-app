@@ -38,10 +38,7 @@ export class HomeComponent implements OnInit {
           console.log(response['list'].length);
           for(let i = 0; i < response['list'].length; i++){
             if (i%8 === 0){
-              console.log(response['list'][i])
               this.forecastData.push(response['list'][i]);
-              console.log('dodano:');
-              console.log(this.forecastData);
             }
           }
           //this.forecastData = response;
@@ -60,7 +57,6 @@ export class HomeComponent implements OnInit {
   getData(input: HTMLInputElement) {
     let city: any = input.value;
 
-    console.log('city: '+ city);
     this.service.getWeather(city)
       .subscribe(
         response => {
