@@ -35,12 +35,14 @@ export class HomeComponent implements OnInit {
     this.service.getForecastWeather(city)
       .subscribe(
         response => {
+          console.log(response);
           console.log(response['list'].length);
           for(let i = 0; i < response['list'].length; i++){
             if (i%8 === 0){
               this.forecastData.push(response['list'][i]);
             }
           }
+          console.log(this.forecastData);
           //this.forecastData = response;
         },
         (error: AppError) => {
@@ -60,8 +62,8 @@ export class HomeComponent implements OnInit {
     this.service.getWeather(city)
       .subscribe(
         response => {
-          console.log(response);
           this.weatherData = response;
+          console.log(this.weatherData);
         },
         (error: AppError) => {
           this.weatherData = null;
