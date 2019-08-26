@@ -1,20 +1,15 @@
 <h1>Weather app</h1>
-<div class="cityInput">
-    <input 
-    (keyup.enter)="getData(city); del()" #city
-    type="text"
-    class="form-control">
 <div class="city-input">
     <div class="city-input-element">
         <input 
-            (keyup.enter)="getData(city)" #city
+            (keyup.enter)="getData(city); del()" #city
             placeholder="Nazwa miasta"
             type="text"
             class="form-control">
     </div>
     <div class="city-input-element">
         <button 
-            (click)="getData(city)"
+            (click)="getData(city); del()"
             class="btn btn-primary">Ok</button>
     </div>    
 </div>
