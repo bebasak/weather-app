@@ -2,18 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../services/home.service';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
+import { slide } from '../animations';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    slide
+  ]
 })
 export class HomeComponent implements OnInit {
-  request: any;
+  weatherData: any;
 
   constructor(private service: HomeService) { }
 
   ngOnInit() {
+  }
+
+  del() {
+    if(this.weatherData)
+      this.weatherData = null;
   }
 
   getData(input: HTMLInputElement) {
@@ -24,10 +33,13 @@ export class HomeComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          this.weatherData = response;
         },
         (error: AppError) => {
-          if (error instanceof NotFoundError)
+          this.weatherData = null;
+          if (error instanceof NotFoundError){            
             alert('Nie znaleziono.');
+          }            
           else {
             throw error;
           }
