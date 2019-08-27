@@ -9,6 +9,6 @@ export class CapitalizeFirstLetterPipe implements PipeTransform {
         if (!value) 
             return null;
 
-        return value.charAt(0).toUpperCase() + value.slice(1);
+        return value.charAt(0).toUpperCase() + (value.slice(1)).toLowerCase();
     }
 }

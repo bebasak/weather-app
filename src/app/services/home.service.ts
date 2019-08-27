@@ -11,7 +11,8 @@ import { NotFoundError } from '../common/not-found-error';
 })
 export class HomeService {
 
-  private url = 'https://community-open-weather-map.p.rapidapi.com/weather?lang=pl&units=metric&q=';
+  private weatherUrl = 'https://community-open-weather-map.p.rapidapi.com/weather?lang=pl&units=metric&q=';
+  private forecastUrl = 'https://community-open-weather-map.p.rapidapi.com/forecast?lang=pl&units=metric&q=';
 
   private headerOptions = {
     headers: new HttpHeaders({
@@ -22,10 +23,15 @@ export class HomeService {
 
   constructor(private http: HttpClient) { }
 
-  
+  getForecastWeather(city: string) {
+    return this.http.get(this.forecastUrl + city, this.headerOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   getWeather(city: string) {
-    return this.http.get(this.url + city, this.headerOptions)
+    return this.http.get(this.weatherUrl + city, this.headerOptions)
       .pipe(
         catchError(this.handleError)
       );

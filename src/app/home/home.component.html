@@ -1,21 +1,29 @@
 <h1>Weather app</h1>
+
 <div class="city-input">
-    <div class="city-input-element">
-        <input 
-            (keyup.enter)="getData(city); del()" #city
-            placeholder="Nazwa miasta"
-            type="text"
-            class="form-control">
-    </div>
-    <div class="city-input-element">
-        <button 
-            (click)="getData(city); del()"
-            class="btn btn-primary">Ok</button>
-    </div>    
+        <div class="alert alert-danger" *ngIf="city.touched && !city.valid">Pole jest wymagane.</div>        
+
+    <form #f="ngForm">
+        <div class="city-input-element">
+            <input 
+                required
+                ngModel name="city"
+                #city="ngModel"
+                placeholder="Nazwa miasta"
+                type="text"
+                class="form-control">        
+        </div>
+        <div class="city-input-element">
+            <button 
+                [disabled]="!f.valid"
+                (click)="getData(city); getForecastWeather(city); del()"
+                class="btn btn-primary">Ok</button>
+        </div>   
+</form> 
 </div>
 
 <div *ngIf="weatherData" class="weather-data" @slide>
-    <h2>Aktualna pogoda w: {{ city.value | titlecase }}</h2>
+    <h2>Aktualna pogoda w: {{ weatherData.name | titlecase }}</h2>
     <ul class="list-group list-group-flush weather-data-elements">
         <li class="list-group-item">
             Data: {{ weatherData.dt*1000 | date:'d.MM.yyyy' }}
@@ -26,5 +34,24 @@
         <li class="list-group-item">
             Opis pogody: {{ weatherData.weather[0].description | capitalizeFirstLetter }}
         </li>        
+    </ul>
+</div>
+
+<div *ngIf="forecastData.length > 0" class="forecast-data" @fade>
+    <h2>Prognoza na najbliższe 5 dni.</h2>
+    <ul>
+        <li *ngFor="let record of forecastData" class="list-group-item forecast-data-item">        
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    Data: {{ record.dt*1000 | date: 'd.MM.yyyy' }}
+                </li>
+                <li class="list-group-item">
+                    Temperatura: {{ record.main.temp | number:'.0-1' }} &deg;C
+                </li>
+                <li class="list-group-item">
+                    Opis pogody: {{ record.weather[0].description | capitalizeFirstLetter }}
+                </li>        
+            </ul>                                     
+        </li>     
     </ul>
 </div>
