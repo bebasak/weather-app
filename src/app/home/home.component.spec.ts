@@ -5,8 +5,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CapitalizeFirstLetterPipe } from '../capitalize-first-letter.pipe';
 import { HomeService } from '../services/home.service';
-import { from, Observable } from 'rxjs';
+import { from, Observable, throwError, empty } from 'rxjs';
 import { NotFoundError } from '../common/not-found-error';
+import { By } from '@angular/platform-browser';
+
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -24,7 +26,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    //fixture.detectChanges();
     service = new HomeService(null);
     component = new HomeComponent(service);
   });
@@ -40,8 +42,6 @@ describe('HomeComponent', () => {
 
     expect(component.weatherData).toBe(vals);
   });
-
-  
 
   it('should set forecastDate to some data from server (every 8th record)', () => {
     let vals = {list: [{num: 0}, {num: 1}, {num: 2}, {num: 3}, {num: 4}, {num: 5}, {num: 6}, {num: 7}, {num: 8}] };
@@ -72,6 +72,43 @@ describe('HomeComponent', () => {
 
     expect(component.forecastData).toEqual([]);
   });
+
+  it('should call server to get weather data', () => {
+    let s = {value: 'test'};
+    let spy = spyOn(service, 'getWeather').and.callFake( c => {
+      return empty();
+    });
+
+    component.getData(s as HTMLInputElement);
+
+    expect(spy).toHaveBeenCalledWith('test');
+  });
+
+  it('should render title in a h1 tag', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Weather app');
+  });
+
+  // it('should return error and reset weatherDate property', () => {
+  //   let s = {value: 'test'};    
+  //   let error = 'error from the server';
+  //   let spy = spyOn(service, 'getWeather').and.returnValue(throwError(error));
+
+  //   component.getData(s as HTMLInputElement);
+
+  //   expect(component.weatherData).toBeNull();
+  //   expect(component.weatherData).toThrowError;
+  // });
+
+  // it('should return 404 error', () => {
+  //   let s = {value: 'test'};
+  //   let spy = spyOn(service, 'getWeather').and.returnValue(throwError(NotFoundError));
+
+  //   component.getData(s as HTMLInputElement);
+
+  //   expect(component.weatherData).toBeNull();
+  //   expect(component.weatherData).toThrowError;
+  // });
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -57,6 +57,8 @@ export class HomeComponent implements OnInit {
   }
 
   getData(input: HTMLInputElement) {
+    console.log('inp: ');
+    console.log(input);
     let city: any = input.value;
 
     this.service.getWeather(city)

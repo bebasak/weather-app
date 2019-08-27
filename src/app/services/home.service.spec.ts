@@ -2,27 +2,31 @@ import { TestBed, async, getTestBed } from '@angular/core/testing';
 import { HomeService } from './home.service';
 import { HomeComponent } from '../home/home.component';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import { throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
 describe('HomeService', () => {
   let service: HomeService;
+  let httpClient: HttpClient;
+  let httpTestingController: HttpTestingController;
   let injector: TestBed;
-  let httpMock: HttpTestingController;
-  let component: HomeComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({ 
       imports: [ HttpClientTestingModule ],
       providers: [ HomeService ]
     });
-
     injector = getTestBed();
-    service = injector.get(HomeService);
-    httpMock = injector.get(HttpTestingController);
+
+    service = new HomeService(null);
+    httpClient = TestBed.get(HttpClient);
+    httpTestingController = TestBed.get(HttpTestingController);
+    //service = injector.get(HomeService);
   });
 
 
-  it('should be created', () => {
+  it('#homeService should be created', () => {
     //const service: HomeService = TestBed.get(HomeService);
     expect(service).toBeTruthy();
   });
